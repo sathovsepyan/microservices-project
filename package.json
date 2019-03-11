@@ -1,0 +1,19 @@
+{
+  "name": "microservices-project",
+  "version": "1.0.0",
+  "description": "temporary description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@version.aalto.fi:hovseps1/microservices-project.git"
+  },
+  "keywords": [
+    "microservices",
+    "nodejs"
+  ],
+  "author": "Satenik Hovsepyan",
+  "license": "ISC"
+}
