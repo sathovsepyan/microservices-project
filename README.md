@@ -21,7 +21,13 @@ Satenik Hovsepyan 727561
 * On receiving the logs, log-shipping container parses, aggregates and stores the logs in Elasticsearch cluster.
 
 #### Service Authentication, Authorization, and Accounting
-*to be added*
+Microservices are responsible only for business logic. Authentication and authorization logic is not placed in microservice implementation.
+The system uses Token Based authentication. For this reason scaling is not an issue, since the token is stored on the client side.
+
+All the external requests to the system go through an API Gateway, that hides microservices. API Gateway translates the original user token into an opaque token
+that only the API Gateway can resolve.
+
+
 
 #### Role-based user Authentication, Authorization, and Accounting
 
