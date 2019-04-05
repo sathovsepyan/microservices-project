@@ -27,6 +27,8 @@ The system uses Token Based authentication. For this reason scaling is not an is
 All the external requests to the system go through an API Gateway, that hides microservices. API Gateway translates the original user token into an opaque token
 that only the API Gateway can resolve.
 
+![alt text](https://version.aalto.fi/gitlab/hovseps1/microservices-project/blob/master/resources/authentication_workflow.png)
+
 
 
 #### Role-based user Authentication, Authorization, and Accounting
