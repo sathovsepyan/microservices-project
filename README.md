@@ -20,6 +20,8 @@ Satenik Hovsepyan 727561
 * The logs of each service are forwarded to fluentd log-driver that sends them to a log-shipping container.
 * On receiving the logs, log-shipping container parses, aggregates and stores the logs in Elasticsearch cluster.
 
+![](/resources/logging.jpeg)
+
 #### Service Authentication, Authorization, and Accounting
 Microservices are responsible only for business logic. Authentication and authorization logic is not placed in microservice implementation.
 The system uses Token Based authentication. For this reason scaling is not an issue, since the token is stored on the client side.
@@ -27,6 +29,7 @@ The system uses Token Based authentication. For this reason scaling is not an is
 All the external requests to the system go through an API Gateway, that hides microservices. API Gateway translates the original user token into an opaque token
 that only the API Gateway can resolve.
 
+![](/resources/authentication_workflow.png)
 
 
 #### Role-based user Authentication, Authorization, and Accounting
