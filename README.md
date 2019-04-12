@@ -9,6 +9,40 @@ Satenik Hovsepyan 727561
 
 *to be added*
 
+
+## Services
+#### Fee Calculation Microservice
+
+Microservice is responsible for calculating the service fee based on input parameters, such as the duration of the appointment and the type of the chosen doctor.
+
+
+
+###### Endpoints
+
+- **<code>GET</code> fee-calculation/fee**
+
+
+Query parameters are:
+- `duration` (int): the duration of the appointment in hours
+
+- `type` (int): type of the selected doctor. Possible values are 
+
+```javascript
+{
+    "cardiologist": 1,
+    "anesthesiologist": 2,
+    "surgeon": 3,
+    "allergist": 4,
+    "other": 5
+}
+```
+
+Example: 
+
+```http
+GET fee-calculation/fee?duration=4&type=2
+```
+
 ## Aspects
 #### Logging
 
