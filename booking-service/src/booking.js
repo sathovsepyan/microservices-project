@@ -11,7 +11,6 @@ module.exports = (app) => {
     })
 
     app.post('/booking', (req, res, next) => {
-        c   
         
         res.status(status.OK).json({})
     })
