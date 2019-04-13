@@ -1,19 +1,26 @@
 # Microservices Project
 Satenik Hovsepyan 727561
 
-## Outline
+## Overview
 
-* RESTful services,
-* Nginx for load balancing,
-* SQL database.  
+The project represents an appointment booking system. In particular, it serves for booking an appointment with a doctor, however, it can be extended for various other services.
+The project consists of 3 microservices. The microservices are: 
+- **Booking Microservice:** Serves for viewing available slots and booking an appointment.
+- **Fee Calculation Microservice:** The main concern of the service is to calculate the total price of the selection.
+- **Payment Microservice:** Serves for interaction with an external bank payment system. 
 
-*to be added*
+All services are implemented as REST APIs using Node.js.
 
 
 ## Services
+#### Booking Microservice
+
 #### Fee Calculation Microservice
 
 Microservice is responsible for calculating the service fee based on input parameters, such as the duration of the appointment and the type of the chosen doctor.
+In real-life scenario, the calculation logic can be complicated, use more parameters and depend on configuration stored in a database or files.
+
+For simplicity, the mocked endpoind receives two parameters: duration and the type of the selected doctor, and calculates the total amount based on that.
 
 
 
@@ -37,13 +44,23 @@ Query parameters are:
 }
 ```
 
-Example: 
+**Example:**
 
 ```http
 GET fee-calculation/fee?duration=4&type=2
 ```
 
+#### Payment Microservice
+
 ## Aspects
+
+The implemented aspects are **Caching**, **Logging** and **SomethingElse**
+
+#### Caching
+
+In order to easily and efficiently access already accessed data, Fee Calculation Microservice uses Redis in-memory data store.
+Since the price calculations can be time effi
+
 #### Logging
 
 *to be added*
@@ -55,21 +72,5 @@ GET fee-calculation/fee?duration=4&type=2
 * On receiving the logs, log-shipping container parses, aggregates and stores the logs in Elasticsearch cluster.
 
 ![](/resources/logging.jpeg)
-
-#### Service Authentication, Authorization, and Accounting
-Microservices are responsible only for business logic. Authentication and authorization logic is not placed in microservice implementation.
-The system uses Token Based authentication. For this reason scaling is not an issue, since the token is stored on the client side.
-
-All the external requests to the system go through an API Gateway, that hides microservices. API Gateway translates the original user token into an opaque token
-that only the API Gateway can resolve.
-
-![](/resources/authentication_workflow.png)
-
-
-#### Role-based user Authentication, Authorization, and Accounting
-
-Two types of users:
-* Service Providers
-* Clients
 
 #### 
