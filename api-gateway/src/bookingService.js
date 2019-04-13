@@ -12,8 +12,6 @@ router.get('/booking/available-slots', (req, res) => {
     api.get(req.path).then(resp => {
         res.send(resp.data)
     })
-
-    // res.send(req.path + " called")
 })
 
 module.exports = router

@@ -2,7 +2,7 @@ var express = require('express'),
   app = express(),
   port = process.env.PORT || 4000;
 
-const configureRoutes = require('./src/fee-calculation');
+const configureRoutes = require('./src/feeCalculation');
 
 configureRoutes(app);
 

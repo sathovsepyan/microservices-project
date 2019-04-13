@@ -1,7 +1,7 @@
 'use strict';
 const status = require('http-status')
 const uuid = require('uuid/v1');
-const redis = require('./redis-client')()
+const redis = require('./redisClient')()
 
 var DoctorTypes = Object.freeze({
     "cardiologist": 1,
