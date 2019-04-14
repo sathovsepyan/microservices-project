@@ -7,19 +7,11 @@ const infoLogger = (logger) => {
         }
 
         logger.info(message);
-        console.log("I will goto the STDOUT");
-        console.log(message);
-        console.error("I will goto the STDERR");
-
 
         const end = res.end;
         res.end = (body, encoding) => {
             logger.info(`Processed request ${req.method} ${req.originalUrl} ` +
                 `statusCode=${res.statusCode}`);
-
-            console.log(`Processed request ${req.method} ${req.originalUrl} ` +
-            `statusCode=${res.statusCode}`);
-
 
             res.end = end;
             res.end(body, encoding);

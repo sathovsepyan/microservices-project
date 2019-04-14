@@ -2,16 +2,14 @@ const config = require('./../config/auth-config');
 const jwt = require('jsonwebtoken');
 const Role = require('./auth/role');
 
-// users hardcoded for simplicity, store in a db for production applications
+// users hardcoded for simplicity, for production enviroments they will be stored in a db
 const users = [
     { id: 1, username: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User', role: Role.Admin },
     { id: 2, username: 'user', password: 'user', firstName: 'Normal', lastName: 'User', role: Role.User }
 ];
 
 module.exports = {
-    authenticate,
-    getAll,
-    getById
+    authenticate
 };
 
 async function authenticate({ username, password }) {
@@ -24,18 +22,4 @@ async function authenticate({ username, password }) {
             token
         };
     }
-}
-
-async function getAll() {
-    return users.map(u => {
-        const { password, ...userWithoutPassword } = u;
-        return userWithoutPassword;
-    });
-}
-
-async function getById(id) {
-    const user = users.find(u => u.id === parseInt(id));
-    if (!user) return;
-    const { password, ...userWithoutPassword } = user;
-    return userWithoutPassword;
 }

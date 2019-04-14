@@ -1,4 +1,3 @@
-
 version: "3"
 
 services:
@@ -8,54 +7,17 @@ services:
   api-gateway:
     build: ./api-gateway    
     ports:
-      - 7000:7000 
+      - 7000:7000
     environment:
-      - FEE_CALC_URL = http://fee-calculation-service:4000
-      - BOOKING_URL = http://booking-service:3000
-      - PAYMENT_URL = http://payment-service:5000
-    # links:
-    #   - fluentd
-    # logging:
-    #   driver: "fluentd"
-    #   options:
-    #     fluentd-address: localhost:24224
-    #     tag: httpd.access
+      - BOOKING_URL=http://booking-service:3000
+      - FEE_CALC_URL=http://fee-calculation-service:4000
+      - PAYMENT_URL=http://payment-service:5000
 
   fee-calculation-service:
     build: ./fee-calculation-service
-    ports:
-      - 4000:4000
     environment:
-      - REDIS_URL= redis://redis:6379/0
+      - REDIS_URL=redis://redis:6379/0
   booking-service:
-    build: ./booking-service    
-    ports:
-      - 3000:3000  
+    build: ./booking-service
   payment-service:
-    build: ./payment-service    
-    ports:
-      - 5000:5000  
-
-  # fluentd:
-  #   build: ./fluentd
-  #   volumes:
-  #     - ./fluentd/conf:/fluentd/etc
-  #   links:
-  #     - "elasticsearch"
-  #   ports:
-  #     - "24224:24224"
-  #     - "24224:24224/udp"
-
-  # elasticsearch:
-  #   image: elasticsearch:5.3.0
-  #   expose:
-  #     - 9200
-  #   ports:
-  #     - "9200:9200"
-
-  # kibana:
-  #   image: kibana:5.3.0
-  #   links:
-  #     - "elasticsearch"
-  #   ports:
-  #     - "5601:5601"
+    build: ./payment-service
