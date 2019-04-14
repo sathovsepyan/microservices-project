@@ -155,9 +155,8 @@ password: LBtM#3#E)"w4:S\,
 
 #### Rolse-based user AAA 
 
-There are two user roles: `Admin` and `User`. Admins are allowed to add new slots for the booking system. 
-For the implementation, I use 
-`authenticate` endpoint serves for authenticating user credentials and returning a JWT token. For simplicity, there are two hardcoded users with both roles.
+There are two user roles: `Admin` and `User`. Some of the endpoints are accessible only for *authenticated* or only for *Admin* users. 
+For simplicity, there are two hardcoded users with both roles.
 
 <table>
   <tr>
@@ -176,7 +175,16 @@ For the implementation, I use
   </tr> 
 </table>
 
-To authorize user roles, I use `authorize` middleware. It validates the JWT tokent in the Authorizatioon http request header and validates the roles. 
+The implementation can be checked by authenticating as different users (`authenticate` endpoint) and trying to access methods such as:
+
+**<code>POST</code> /booking/slots/slot** (only for *Admin* users)
+
+**<code>GET</code> /fee-calculation/fee** (for all *authenticated* users)
+
+**<code>GET</code> /booking/slots** (available publicly)
+
+
+To authorize user roles, I use `authorize` middleware. It validates the JWT tokent in the authorization http request header and validates the roles. 
 It can be added to any endpoint to authenticate users with specified roles. 
 If no roles are specified, all authenticated users will be authorized. 
 If either authentication or authorization fails then a **401 Unauthorized** response is returned.
