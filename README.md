@@ -74,27 +74,31 @@ Once the parameters are retreived and the price is calculated, it is being store
 
 #### Rolse-based user AAA 
 
-There are two user roles: Admin and User. Admins are allowed to add new slots for the booking system. 
+There are two user roles: `Admin` and `User`. Admins are allowed to add new slots for the booking system. 
 For the implementation, I use 
 `authenticate` endpoint serves for authenticating user credentials and returning a JWT token. For simplicity, there are two hardcoded users with both roles.
 
-<TABLE>
-<TR id="row1">
-   <TH>Role: Admin  <TD>
-{
+<table>
+  <tr>
+    <th>Role: Admin</th>
+<td>{
 	"username": "admin",
 	"password": "admin"
-}
-<TR id="row2">
-   <TH>Role: User   <TD>
-{
+}</td>
+  </tr>
+  <tr>
+    <th>Role: User</th>
+    <td>{
 	"username": "user",
 	"password": "user"
-}
-</TABLE>
+}</td>
+  </tr> 
+</table>
 
-To authorize user roles, I use `authorize` middleware that can be added to authenticated users with specified roles. 
+To authorize user roles, I use `authorize` middleware. It validates the JWT tokent in the Authorizatioon http request header and validates the roles. 
+It can be added to any endpoint to authenticate users with specified roles. 
 If no roles are specified, all authenticated users will be authorized. 
+If either authentication or authorization fails then a 401 Unauthorized response is returned.
 
 
 ##### Architecture foundations
