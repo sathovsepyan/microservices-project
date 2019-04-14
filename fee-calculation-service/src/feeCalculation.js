@@ -78,6 +78,8 @@ module.exports = (app) => {
                     return res.status(status.OK).json(JSON.parse(data));
                 }
 
+                console.log('read from db');
+
                 //in real-life, retrieve the values from the database
                 let priceList = {
                     "cardiologist": 200,

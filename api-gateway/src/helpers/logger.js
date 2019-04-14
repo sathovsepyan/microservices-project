@@ -16,7 +16,7 @@ for (let i = 0; i < config.transports.length; i += 1) {
   
 var winstonPapertrail = new winston.transports.Papertrail({
     host: 'logs.papertrailapp.com',
-    port: 16478
+    port: 11926
 });
 
 transports.push(winstonPapertrail);

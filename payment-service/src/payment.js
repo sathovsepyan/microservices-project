@@ -10,6 +10,11 @@ module.exports = (app) => {
     })
 
     app.get('/payments/payment/:paymentId', (req, res, next) => {
-        res.status(status.OK).json({})
+        res.status(status.OK).json({
+            id: uuid(),
+            booking_number: uuid(),
+            amount: 100,
+            date: new Date()
+        })
     })
 }

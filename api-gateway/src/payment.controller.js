@@ -8,8 +8,13 @@ const api = apiAdapter(BASE_URL)
 
 
 router.post('/payments/payment', (req, res) => {
+    api.post(req.path, req.body).then(resp => {
+        res.send(resp.data)
+    })
+})
 
-    api.get(req.path, req.body).then(resp => {
+router.get('/payments/payment/:paymentId', (req, res, next) => {
+    api.get(req.path, { params: req.query }).then(resp => {
         res.send(resp.data)
     })
 })
