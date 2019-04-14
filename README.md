@@ -12,6 +12,8 @@ The **[API Gateway](/api-gateway)** serves as an entry point for all incoming re
 
 All services are implemented as REST APIs using Node.js.
 
+Implemented aspects are **Caching**, **Logging** and **Role-based user AAA**
+
 ## Building the project
 Start containers by running `docker-compose up` from the root directory.
 
@@ -137,7 +139,7 @@ Sample body:
 
 ## Aspects
 
-The implemented aspects are **Caching**, **Logging** and **Role-based user AAA**
+Implemented aspects are **Caching**, **Logging** and **Role-based user AAA**
 
 #### Caching
 
@@ -147,11 +149,19 @@ Once the parameters are retreived and the price is calculated, it is being store
 
 #### Logging
 
+In order to manage logs, I use `winston` logging library with [Papertrail](https://papertrailapp.com/) transport. Two log levels *info* and *error* are being used.
+
+- **Info Logger** is implemented as a middleware in API Gateway through which all the incoming requests pass. As a result, no manual logging functions are inserted. 
+- **Error Logger** logs the errors from a global exception handler. 
+
+Papertrail transport allows to store the logs in a **centralized** location and in real-time. 
+For testing purposes, logs are being stored in local files as well (this can be enabled or disabled if needed).
+
 Logs can be viewed at https://papertrailapp.com/events
-
+```
 username: microservicestest8@gmail.com
-
 password: LBtM#3#E)"w4:S\,
+```
 
 #### Rolse-based user AAA 
 
