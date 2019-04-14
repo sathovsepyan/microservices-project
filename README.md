@@ -9,6 +9,8 @@ The project consists of 3 microservices. The microservices are:
 - **Fee Calculation Microservice:** The main concern of the service is to calculate the total price of the selection.
 - **Payment Microservice:** Serves for interaction with an external bank payment system. 
 
+In addition, there is an **API Gateway**, that serves as an entry point for all outgoing requests and authorizes them.
+
 All services are implemented as REST APIs using Node.js.
 
 
@@ -20,19 +22,14 @@ All services are implemented as REST APIs using Node.js.
 Microservice is responsible for calculating the service fee based on input parameters, such as the duration of the appointment and the type of the chosen doctor.
 In real-life scenario, the calculation logic can be complicated, use more parameters and depend on configuration stored in a database or files.
 
-For simplicity, the mocked endpoind receives two parameters: duration and the type of the selected doctor, and calculates the total amount based on that.
-
-
-
 ###### Endpoints
 
-- **<code>GET</code> fee-calculation/fee**
-
+**<code>GET</code> fee-calculation/fee** 
+Calculates the total price of an appointment, based on its duration and the type of the selected doctor. 
 
 Query parameters are:
-- `duration` (int): the duration of the appointment in hours
-
-- `type` (int): type of the selected doctor. Possible values are 
+`duration` (int): the duration of the appointment in hours
+`type` (int): type of the selected doctor. Possible values are
 
 ```javascript
 {
@@ -50,20 +47,59 @@ Query parameters are:
 GET fee-calculation/fee?duration=4&type=2
 ```
 
+**<code>GET</code> fee-calculation/fees** 
+
+Shows fees of available doctor types.
+
+**Example:**
+
+```http
+GET fee-calculation/fees
+```
 #### Payment Microservice
 
 ## Aspects
 
-The implemented aspects are **Caching**, **Logging** and **SomethingElse**
+The implemented aspects are **Caching**, **Logging** and **Role-based user AAA**
 
 #### Caching
 
 In order to easily and efficiently access already accessed data, Fee Calculation Microservice uses Redis in-memory data store.
-Since the price calculations can be time effi
+Calculating the price of the appointment depends on configuration values from the database and some calculations based on that. 
+Once the parameters are retreived and the price is calculated, it is being stored in redis cache and will be used in subsequent requests. 
 
 #### Logging
 
 *to be added*
+
+#### Rolse-based user AAA 
+
+There are two user roles: `Admin` and `User`. Admins are allowed to add new slots for the booking system. 
+For the implementation, I use 
+`authenticate` endpoint serves for authenticating user credentials and returning a JWT token. For simplicity, there are two hardcoded users with both roles.
+
+<table>
+  <tr>
+    <th>Role: Admin</th>
+<td>{
+	"username": "admin",
+	"password": "admin"
+}</td>
+  </tr>
+  <tr>
+    <th>Role: User</th>
+    <td>{
+	"username": "user",
+	"password": "user"
+}</td>
+  </tr> 
+</table>
+
+To authorize user roles, I use `authorize` middleware. It validates the JWT tokent in the Authorizatioon http request header and validates the roles. 
+It can be added to any endpoint to authenticate users with specified roles. 
+If no roles are specified, all authenticated users will be authorized. 
+If either authentication or authorization fails then a 401 Unauthorized response is returned.
+
 
 ##### Architecture foundations
 * Microservices don't know where their logs are stored, they log to *stdout* or *stderr*. The execution environemnt handles destination of logs.
