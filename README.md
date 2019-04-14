@@ -129,7 +129,11 @@ Once the parameters are retreived and the price is calculated, it is being store
 
 #### Logging
 
+Logs can be viewed at https://papertrailapp.com/events
 
+username: microservicestest8@gmail.com
+
+password: LBtM#3#E)"w4:S\,
 
 #### Rolse-based user AAA 
 
