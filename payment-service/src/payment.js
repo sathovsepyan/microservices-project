@@ -6,7 +6,7 @@ module.exports = (app) => {
     app.post('/payments/payment', (req, res, next) => {
         //call some external service for the payment 
         //return payment id 
-        res.status(status.OK).json(uuid())
+        res.status(status.OK).json({payment_id: uuid()})
     })
 
     app.get('/payments/payment/:paymentId', (req, res, next) => {
