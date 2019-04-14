@@ -198,3 +198,12 @@ To authorize user roles, I use `authorize` middleware. It validates the JWT toke
 It can be added to any endpoint to authenticate users with specified roles. 
 If no roles are specified, all authenticated users will be authorized. 
 If either authentication or authorization fails then a **401 Unauthorized** response is returned.
+
+
+#### References:
+https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
+https://hackernoon.com/creating-simple-api-gateway-using-node-js-6d5933c214b8
+https://papertrailapp.com
+https://github.com/cornflourblue/node-role-based-authorization-api
+https://medium.com/@cramirez92/build-a-nodejs-cinema-microservice-and-deploying-it-with-docker-part-1-7e28e25bfa8b
+
