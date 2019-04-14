@@ -3,13 +3,13 @@ const router = express.Router()
 
 const apiAdapter = require('./helpers/apiAdapter')
 
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = process.env.PAYMENT_URL || 'http://localhost:5000'
 const api = apiAdapter(BASE_URL)
 
 
-router.get('/booking/available-slots', (req, res) => {
+router.post('/payments/payment', (req, res) => {
 
-    api.get(req.path).then(resp => {
+    api.get(req.path, req.body).then(resp => {
         res.send(resp.data)
     })
 })

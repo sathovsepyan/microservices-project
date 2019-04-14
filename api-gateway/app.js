@@ -5,8 +5,8 @@ var express = require('express'),
 const configureRoutes = require('./src/router');
 const configureMiddleware = require('./src/middleware');
 
-configureRoutes(app);
 configureMiddleware(app);
+configureRoutes(app);
 
 app.listen(port, () => {
     console.log(`server running on port: ${port}`)

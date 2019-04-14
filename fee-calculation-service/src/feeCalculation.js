@@ -11,6 +11,7 @@ var DoctorTypes = Object.freeze({
     "other": 5
 })
 
+
 module.exports = (app) => {
     app.get('/fee-calculation/fee', (req, res, next) => {
 
@@ -27,7 +28,7 @@ module.exports = (app) => {
                         fee: data
                     });
                 }
-                
+
                 console.log('calculating');
 
                 let fee = 0;
@@ -66,4 +67,29 @@ module.exports = (app) => {
                 })
             })
     })
+
+    app.get('/fee-calculation/fees', (req, res, next) => {
+        let currentKey = '*3';
+
+        redis.getAsync(currentKey)
+            .then((data) => {
+                if (data != null) {
+                    console.log('got from redis');
+                    return res.status(status.OK).json(JSON.parse(data));
+                }
+
+                //in real-life, retrieve the values from the database
+                let priceList = {
+                    "cardiologist": 200,
+                    "anesthesiologist": 100,
+                    "surgeon": 250,
+                    "allergist": 110,
+                    "other": 50,
+                };
+                redis.set(currentKey, JSON.stringify(priceList));
+                res.status(status.OK).json(
+                    priceList
+                );
+            })
+    });
 }

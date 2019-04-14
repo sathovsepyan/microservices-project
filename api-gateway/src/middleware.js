@@ -1,7 +1,8 @@
 'use strict';
-// const bodyParser = require('body-parser');
-// const compression = require('compression');
-const bookingService = require('./bookingService');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+const bookingController = require('./booking.controller');
+const feeCalculationController = require('./fee-calculation.controller');
 
 
 const logger = require('./helpers/logger');
@@ -9,18 +10,19 @@ const infoLogger = require('./helpers/infoLogger')(logger);
 const globalErrorHandler = require('./helpers/globalErrorHandler')(logger);
 
 const configureMiddlware = (app) => {
-    // CHECK IF I NEED THIS
-    //   app.use(bodyParser.json());
-    //   app.use(bodyParser.urlencoded({
-    //     extended: true
-    //   }));
-    //   app.use(compression());
+
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
+    app.use(compression());
+
 
     app.use(infoLogger.logInfo);
 
-    //all the services that API Gateway should access should be added here\
-    app.use(bookingService)
-
+    //all the routes that API Gateway should access should be added here
+    app.use(bookingController);
+    app.use(feeCalculationController);
 
     app.use(globalErrorHandler.handleError);
 };

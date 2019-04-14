@@ -8,7 +8,11 @@ services:
   api-gateway:
     build: ./api-gateway    
     ports:
-      - 7000:7000  
+      - 7000:7000 
+    environment:
+      - FEE_CALC_URL = http://fee-calculation-service:4000
+      - BOOKING_URL = http://booking-service:3000
+      - PAYMENT_URL = http://payment-service:5000
     # links:
     #   - fluentd
     # logging:
