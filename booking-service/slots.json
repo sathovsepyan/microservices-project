@@ -1,0 +1,41 @@
+[{
+    "id": "1",
+    "start": "Apr 14 2019 18:00:00",
+    "duration": 2,
+    "doctor": {
+        "type": 2,
+        "name": "Naida Adkisson",
+        "address": "8555 Creekside St. Valrico, FL 33594"
+    },
+    "available": false
+}, {
+    "id": 2,
+    "start": "Apr 15 2019 17:00:00",
+    "duration": 2,
+    "doctor": {
+        "type": 3,
+        "name": "Bulah Harney",
+        "address": "2 Wilson St. Battle Ground, WA 98604"
+    },
+    "available": true
+}, {
+    "id": 3,
+    "start": "Apr 17 2019 11:00:00",
+    "duration": 1,
+    "doctor": {
+        "type": 4,
+        "name": "Rob Beattie",
+        "address": "7116 Birchwood Drive Windsor Mill, MD 21244"
+    },
+    "available": true
+}, {
+    "id": 4,
+    "start": "Apr 19 2019 09:00:00",
+    "duration": 2,
+    "doctor": {
+        "type": 2,
+        "name": "Naida Adkisson",
+        "address": "8555 Creekside St. Valrico, FL 33594"
+    },
+    "available": true
+}]
