@@ -14,7 +14,7 @@ In addition, there is an **API Gateway**, that serves as an entry point for all 
 All services are implemented as REST APIs using Node.js.
 
 
-![](/resources/architecture.jpg)
+![](/resources/overall_architecture.jpg)
 
 ## Services
 #### API Gateway
