@@ -1,6 +1,7 @@
 'use strict';
 const winston = require('winston');
-const config = require('../config/logger-config.json');
+const config = require('./../../config/logger-config');
+
 require('winston-papertrail').Papertrail;
 // const { PapertrailConnection, PapertrailTransport } = require('winston-papertrail');
 

@@ -4,9 +4,9 @@
 const bookingService = require('./bookingService');
 
 
-const logger = require('./logger');
-const infoLogger = require('./infoLogger')(logger);
-const globalErrorHandler = require('./globalErrorHandler')(logger);
+const logger = require('./helpers/logger');
+const infoLogger = require('./helpers/infoLogger')(logger);
+const globalErrorHandler = require('./helpers/globalErrorHandler')(logger);
 
 const configureMiddlware = (app) => {
     // CHECK IF I NEED THIS

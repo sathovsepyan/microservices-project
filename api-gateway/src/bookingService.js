@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 
-const apiAdapter = require('./apiAdapter')
+const apiAdapter = require('./helpers/apiAdapter')
 
 const BASE_URL = 'http://localhost:3000'
 const api = apiAdapter(BASE_URL)

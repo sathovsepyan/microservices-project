@@ -1,0 +1,57 @@
+
+version: "3"
+
+services:
+  redis:
+    image: redis:alpine
+ 
+  api-gateway:
+    build: ./api-gateway    
+    ports:
+      - 7000:7000  
+    # links:
+    #   - fluentd
+    # logging:
+    #   driver: "fluentd"
+    #   options:
+    #     fluentd-address: localhost:24224
+    #     tag: httpd.access
+
+  fee-calculation-service:
+    build: ./fee-calculation-service
+    ports:
+      - 4000:4000
+    environment:
+      - REDIS_URL= redis://redis:6379/0
+  booking-service:
+    build: ./booking-service    
+    ports:
+      - 3000:3000  
+  payment-service:
+    build: ./payment-service    
+    ports:
+      - 5000:5000  
+
+  # fluentd:
+  #   build: ./fluentd
+  #   volumes:
+  #     - ./fluentd/conf:/fluentd/etc
+  #   links:
+  #     - "elasticsearch"
+  #   ports:
+  #     - "24224:24224"
+  #     - "24224:24224/udp"
+
+  # elasticsearch:
+  #   image: elasticsearch:5.3.0
+  #   expose:
+  #     - 9200
+  #   ports:
+  #     - "9200:9200"
+
+  # kibana:
+  #   image: kibana:5.3.0
+  #   links:
+  #     - "elasticsearch"
+  #   ports:
+  #     - "5601:5601"
