@@ -31,6 +31,15 @@ API Gateway is the only entry point for the clients. Microservice ports are not 
 
 In addition, API Gateway authenticates and authorizes the users and logs all the requests. 
 
+To authenticate to the system, please use 
+- **<code>POST</code> /authenticate** with request body 
+```javascript
+    {
+        "username": "user",
+        "password": "user"
+    }
+```
+
 #### Booking Microservice
 
 Booking Microservice is responsible for listing available booking slots, booking the selected one and adding new slots. 
@@ -40,15 +49,15 @@ For simplicity, the data is stored in a json file and data validations are omitt
 
 Available endpoints are:
 
-- **<code>GET</code> booking/slots** 
+- **<code>GET</code> /booking/slots** 
 Returns all available booking slots. Accessible by everybody.
 
-- **<code>POST</code> booking/slots/slot** 
+- **<code>POST</code> /booking/slots/slot** 
 Creates a new booking slot. Accessible by Admin users.
 
 Sample body: 
 ```javascript
-{
+    {
         "id": 15,
         "start": "Apr 19 2019 09:00:00",
         "duration": 2,
@@ -60,7 +69,7 @@ Sample body:
     }
 ```
 
-- **<code>POST</code> booking/slots/:id/book** 
+- **<code>POST</code> /booking/slots/:id/book** 
 Books the slot by id. Accessible by all authenticated users.
 
 Body: Empty
@@ -73,10 +82,10 @@ Microservices uses Redis cache for already calculated values.
 
 Available endpoints are:
 
-- **<code>GET</code> fee-calculation/fee** 
-Calculates the total price of an appointment, based on its duration and the type of the selected doctor. 
+- **<code>GET</code> /fee-calculation/fee** 
+Calculates the total price of an appointment, based on its duration and the type of the selected doctor. Accessible by all authenticated users.
 
-Example: `GET fee-calculation/fee?duration=4&type=2`
+Example: `GET /fee-calculation/fee?duration=4&type=2`
 
 Query parameters are:
 `duration` (int): the duration of the appointment in hours
@@ -94,18 +103,18 @@ Query parameters are:
 ```
 
 
-- **<code>GET</code> fee-calculation/fees** 
+- **<code>GET</code> /fee-calculation/fees** 
 
-Shows fees of available doctor types.
+Shows fees of available doctor types. Accessible by all authenticated users.
 
 
 #### Payment Microservice
 
 Available endpoints are:
 
-- **<code>GET</code> payments/pay** 
+- **<code>GET</code> /payments/pay** 
 
-- **<code>POST</code> payments/** 
+- **<code>POST</code> /payments** 
 
 
 ## Aspects
@@ -120,7 +129,7 @@ Once the parameters are retreived and the price is calculated, it is being store
 
 #### Logging
 
-*to be added*
+
 
 #### Rolse-based user AAA 
 
