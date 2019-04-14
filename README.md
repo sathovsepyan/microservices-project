@@ -151,10 +151,10 @@ Once the parameters are retreived and the price is calculated, it is being store
 
 In order to manage logs, I use `winston` logging library with [Papertrail](https://papertrailapp.com/) transport. Two log levels *info* and *error* are being used.
 
-- **Info Logger** is implemented as a middleware in API Gateway through which all the incoming requests pass. As a result, no manual logging functions are inserted. 
+- **Info Logger** is implemented as a middleware in API Gateway through which all the incoming requests are passed. As a result, no manual logging functions are inserted. 
 - **Error Logger** logs the errors from a global exception handler. 
 
-Papertrail transport allows to store the logs in a **centralized** location and in real-time. 
+Papertrail transport allows to store the logs in a **centralized** location and in **real-time**. 
 For testing purposes, logs are being stored in local files as well (this can be enabled or disabled if needed).
 
 Logs can be viewed at https://papertrailapp.com/events
