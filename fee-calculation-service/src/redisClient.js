@@ -4,9 +4,8 @@ const bluebird = require('bluebird')
 bluebird.promisifyAll(redis.RedisClient.prototype);
 
 
-const client = redis.createClient();
+const client = redis.createClient(process.env.REDIS_URL);
 const todayEnd = new Date().setHours(23, 59, 59, 999);
-// const testEnd = new Date().setHours(1, 48, 0, 0);
 
 const redisClient = () => {
     const get = (key, callback) =>
