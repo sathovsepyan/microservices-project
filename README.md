@@ -14,15 +14,32 @@ In addition, there is an **API Gateway**, that serves as an entry point for all 
 All services are implemented as REST APIs using Node.js.
 
 
+![](/resources/architecture.jpg)
+
 ## Services
+#### API Gateway
+
+Clients can make requests to microservices only through the API Gateway. Microservice ports are not exposed. 
+API Gateway also authenticates and authorizes the users. 
+
 #### Booking Microservice
+
+Booking Microservice is responsible for listing available booking slots, booking the selected one and adding new slots. 
+
+Available endpoints are:
+
+- **<code>GET</code> booking/slots** 
+
+- **<code>POST</code> booking/slots/slot** 
+
+- **<code>POST</code> booking/slots/:id/book** 
 
 #### Fee Calculation Microservice
 
 Microservice is responsible for calculating the service fee based on input parameters, such as the duration of the appointment and the type of the chosen doctor.
 In real-life scenario, the calculation logic can be complicated, use more parameters and depend on configuration stored in a database or files.
 
-###### Endpoints
+Available endpoints are:
 
 **<code>GET</code> fee-calculation/fee** 
 Calculates the total price of an appointment, based on its duration and the type of the selected doctor. 
@@ -58,13 +75,20 @@ GET fee-calculation/fees
 ```
 #### Payment Microservice
 
+Available endpoints are:
+
+- **<code>GET</code> payments/pay** 
+
+- **<code>POST</code> payments/** 
+
+
 ## Aspects
 
 The implemented aspects are **Caching**, **Logging** and **Role-based user AAA**
 
 #### Caching
 
-In order to easily and efficiently access already accessed data, Fee Calculation Microservice uses Redis in-memory data store.
+In order to easily and efficiently access already accessed data, Fee Calculation Microservice uses **`Redis`** in-memory data store.
 Calculating the price of the appointment depends on configuration values from the database and some calculations based on that. 
 Once the parameters are retreived and the price is calculated, it is being stored in redis cache and will be used in subsequent requests. 
 
@@ -107,6 +131,5 @@ If either authentication or authorization fails then a 401 Unauthorized response
 * The logs of each service are forwarded to fluentd log-driver that sends them to a log-shipping container.
 * On receiving the logs, log-shipping container parses, aggregates and stores the logs in Elasticsearch cluster.
 
-![](/resources/logging.jpeg)
 
 #### 
