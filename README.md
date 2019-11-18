@@ -1,5 +1,7 @@
 # Microservices Project
-Satenik Hovsepyan 727561
+*Satenik Hovsepyan 727561*
+
+The focus of the project is on how the service is structured on operated rather than what functionality it implements. The actual "business functionality" is mocked. However, inter-service operations are functional and are implemented as *three aspects* of microservice architectural patterns.
 
 ## Overview
 
